@@ -12,4 +12,10 @@
 
 > One of the features of `bcrypt` is that you can use `accumulative hashing rounds`. This rehashes the password multiple times, therefore taking longer to process. It does increase the time to login, but also increases the time it takes for a hacker to attempt to try multiple passwords. Therefore things such as Rainbow Table Attacks would take longer to test different passwords attempting to reverse hash.
 
-- [ ] What are the three parts of the JSON Web Token?
+- [x] What are the three parts of the JSON Web Token?
+
+> JSON Web Token consist of: a Header, a Payload, and a Signature
+
+> - Header: declares the type and the hashing algorithm to use.
+> - Payload: this is the bulk of the token including the content such as issuer of the token, subject of the token, expiration, etc.
+> - Signature: this is a hash of the header, payload, and secret.

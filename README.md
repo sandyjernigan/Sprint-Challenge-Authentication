@@ -38,13 +38,25 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] What is the purpose of using _sessions_?
+- [x] What is the purpose of using _sessions_?
 
-- [ ] What does bcrypt do to help us store passwords in a secure manner.
+> Sessions are a method to store data in a unique way that can persist state information over multiple pages. Sessions are unique to the individual user, usually accosiated with some kind of login and user management system (such as databases). Sessions are usually sent to the browser via cookies. Cookies can be checked to verify existing session data (such as testing to see if the user is logined in).
 
-- [ ] What does bcrypt do to slow down attackers?
+- [x] What does bcrypt do to help us store passwords in a secure manner?
 
-- [ ] What are the three parts of the JSON Web Token?
+> The module called `bcrypt` can be used as a method of authentication. This tool has features that include: password hashing, comparing hashed passwords, implement salting, and accumulative hashing rounds. These tools can be used to secure passwords, so that the user's password is never actually stored anywhere in the site. This helps to prevent password theft. Bcrypt can be used to first hash a password, as well as compare the hashed password to verify it matches. One of the best security measures this solves, is that wiht bcrypt the password hash cannot be un-done. There is no way to directly get the password back.
+
+- [x] What does bcrypt do to slow down attackers?
+
+> One of the features of `bcrypt` is that you can use `accumulative hashing rounds`. This rehashes the password multiple times, therefore taking longer to process. It does increase the time to login, but also increases the time it takes for a hacker to attempt to try multiple passwords. Therefore things such as Rainbow Table Attacks would take longer to test different passwords attempting to reverse hash.
+
+- [x] What are the three parts of the JSON Web Token?
+
+> JSON Web Token consist of: a Header, a Payload, and a Signature
+
+> - Header: declares the type and the hashing algorithm to use.
+> - Payload: this is the bulk of the token including the content such as issuer of the token, subject of the token, expiration, etc.
+> - Signature: this is a hash of the header, payload, and secret.
 
 ## Minimum Viable Product
 

@@ -13,11 +13,10 @@ module.exports = (req, res, next) => {
   // see if there is a token
   if (token) { 
     //  rehash the header + payload + secret and see if it matches our verify signature
-    console.log(jwtSecret)
     jwt.verify(token, jwtSecret, (err, decodedToken) => {
       // check if it is valid, error if not
       if (err) {
-        console.log(err)
+        console.log(err.message)
         res.status(401).json({ message: 'You shall not pass!' });
       } else { 
         // token is valid

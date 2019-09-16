@@ -21,8 +21,8 @@ describe('Auth Router', () => {
         
     it('should add user and return status 201', () => {
 
-      request(router)
-        .post('/register')
+      const results = request(router)
+        .post('/api/auth/register')
         .type('application/json')
         .send(testUser)
         .expect(201, testUser);
@@ -40,7 +40,7 @@ describe('Auth Router', () => {
 
       // test if user can login
       request(router)
-        .post('/login')
+        .post('/api/auth/login')
         .send(testUser)
         .set('Accept', 'application/json')
         .expect(200, testUser);

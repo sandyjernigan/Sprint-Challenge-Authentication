@@ -81,4 +81,4 @@ typings/
 
 # Database files
 *.db3
-database/
+database/*.db3

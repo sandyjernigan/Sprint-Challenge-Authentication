@@ -14,7 +14,6 @@ function find() {
 
 function findBy(filter) {
   return db('users')
-    .select('id', 'username')
     .where(filter);
 }
 

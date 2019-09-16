@@ -10,10 +10,6 @@ const insertData = {
   username: 'user', 
   password: 'testpass'
 };
-const expectedResultsForUser = { 
-  id: 1,
-  username: 'user' 
-};
 
 describe('Users Model', () => {
 
@@ -66,25 +62,26 @@ describe('Users Model', () => {
       // assertion
       const results = await db('users');
       expect(results.length).toBe(1);
-      expect(user).toEqual(expectedResultsForUser);
+      expect(user.id).toEqual(1);
+      expect(user.username).toEqual('user');
     });
   });
   
   // test findBy(filter)
   describe('function findBy(filter)', () => {
     it('findBy(filter) should resolve to 1 user when searching username', async () => {
-      await db('users').insert(insertData);
-      await db('users').insert({username: 'user2', password: 'testpass2'});
-      await db('users').insert({username: 'user3', password: 'testpass3'});
+      const user1 = await db('users').insert(insertData);
+      const user2 = await db('users').insert({username: 'user2', password: 'testpass2'});
+      const user3 = await db('users').insert({username: 'user3', password: 'testpass3'});
 
       username = { username: 'user' }
 
       // findBy(filter) -- search database where({ username })
-      const user = await Users.findBy(username)
+      const results = await Users.findBy(username)
 
       // assertion
-      expect(user.length).toBe(1);
-      expect(user).toEqual([expectedResultsForUser]);
+      expect(results.length).toBe(1);
+      expect(results[0].username).toEqual('user');
     });
     
   });

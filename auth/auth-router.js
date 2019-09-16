@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET || 'secret should be set in env';
 
 // User Models
 const Users = require('./users-model.js');
@@ -14,7 +15,7 @@ router.post('/register', (req, res) => {
   Users.add(user)
     .then(saved => {
       // use function to generate token
-      const token= generateToken(saved);
+      const token = generateToken(saved);
       res.status(201).json({user: saved, token});
     })
     .catch(error => {
@@ -38,7 +39,7 @@ function generateToken(user) {
   };
 
   // extract the secret away so it can be required and used where needed
-  return jwt.sign(payload, process.env.JWT_SECRET, options); // this method is synchronous
+  return jwt.sign(payload, jwtSecret, options);
 }
 
 module.exports = router;

@@ -19,13 +19,16 @@ describe('Auth Router', () => {
   // Add Testing for POST /api/auth/register
   describe('test register', () => {
         
-    it('should add user and return status 201', () => {
-
-      const results = request(router)
+    it('should add user and return status 201', async () => {
+      request(router)
         .post('/api/auth/register')
-        .type('application/json')
-        .send(testUser)
-        .expect(201, testUser);
+        .send(testUser)        
+        .set('Accept', 'application/json')
+        .expect(201);
+
+        // expect(res.statusCode).toBe(201);
+        // .type('application/json')
+        // .send(testUser)
     })
 
   });
@@ -39,11 +42,12 @@ describe('Auth Router', () => {
       await db('users').insert(testUser);
 
       // test if user can login
-      request(router)
+      const res = request(router)
         .post('/api/auth/login')
         .send(testUser)
         .set('Accept', 'application/json')
         .expect(200, testUser);
+        //expect(res.statusCode).toEqual(200)
         
     })
 

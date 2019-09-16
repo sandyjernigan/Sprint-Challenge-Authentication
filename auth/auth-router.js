@@ -7,6 +7,19 @@ const Users = require('./users-model.js');
 
 router.post('/register', (req, res) => {
   // implement registration
+  let user = req.body;
+  const hash = bcrypt.hashSync(user.password, 12);
+  user.password = hash;
+
+  Users.add(user)
+    .then(saved => {
+      // use function to generate token
+      const token= generateToken(saved);
+      res.status(201).json({user: saved, token});
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 });
 
 router.post('/login', (req, res) => {
